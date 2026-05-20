@@ -1,5 +1,8 @@
 import { useRef, useState } from 'react'
-import song from './assets/music/Blue_Jeans.mp3'
+<audio
+  ref={audioRef}
+  src='/music/Blue_Jeans.mp3'
+/>
 
 function App() {
   const audioRef = useRef(null)
