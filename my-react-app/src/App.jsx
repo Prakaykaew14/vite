@@ -1,13 +1,13 @@
 import { useRef, useState } from 'react'
-<audio
-  ref={audioRef}
-  src='/music/Blue_Jeans.mp3'
-/>
+import song from './assets/music/Blue_Jeans.mp3'
 
 function App() {
   const audioRef = useRef(null)
 
   const [isPlaying, setIsPlaying] = useState(false)
+
+  const isMobile = window.innerWidth <= 768
+  const isTablet = window.innerWidth <= 1024
 
   const toggleMusic = () => {
     if (isPlaying) {
@@ -46,6 +46,8 @@ function App() {
         minHeight: '100vh',
         width: '100%',
         display: 'flex',
+        flexDirection: isMobile ? 'column' : 'row',
+        overflow: 'hidden',
         background:
           'linear-gradient(135deg, #f8fafc, #e2e8f0, #ffffff)',
         fontFamily: 'Arial'
@@ -54,11 +56,17 @@ function App() {
       {/* Sidebar */}
       <div
         style={{
-          width: '260px',
+          width: isMobile
+            ? '100%'
+            : isTablet
+            ? '220px'
+            : '260px',
+
           background: 'rgba(255,255,255,0.7)',
           backdropFilter: 'blur(20px)',
           borderRight: '1px solid rgba(255,255,255,0.5)',
           padding: '30px',
+
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between'
@@ -97,7 +105,8 @@ function App() {
             background: '#0f172a',
             color: 'white',
             padding: '20px',
-            borderRadius: '25px'
+            borderRadius: '25px',
+            marginTop: '40px'
           }}
         >
           <p style={{ fontSize: '14px', opacity: 0.8 }}>
@@ -114,7 +123,7 @@ function App() {
       <div
         style={{
           flex: 1,
-          padding: '40px',
+          padding: isMobile ? '20px' : '40px',
           display: 'flex',
           flexDirection: 'column'
         }}
@@ -123,8 +132,10 @@ function App() {
         <div
           style={{
             display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
             justifyContent: 'space-between',
-            alignItems: 'center',
+            alignItems: isMobile ? 'flex-start' : 'center',
+            gap: '20px',
             marginBottom: '40px'
           }}
         >
@@ -132,7 +143,7 @@ function App() {
             type='text'
             placeholder='Search music...'
             style={{
-              width: '320px',
+              width: isMobile ? '100%' : '320px',
               padding: '15px 20px',
               borderRadius: '50px',
               border: 'none',
@@ -171,9 +182,16 @@ function App() {
             borderRadius: '35px',
             padding: '40px',
             color: 'white',
+
             display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+
             justifyContent: 'space-between',
-            alignItems: 'center'
+            alignItems: 'center',
+
+            gap: '25px',
+
+            textAlign: isMobile ? 'center' : 'left'
           }}
         >
           <div>
@@ -183,7 +201,7 @@ function App() {
 
             <h1
               style={{
-                fontSize: '45px',
+                fontSize: isMobile ? '35px' : '45px',
                 marginTop: '10px'
               }}
             >
@@ -206,7 +224,7 @@ function App() {
             src='https://upload.wikimedia.org/wikipedia/commons/6/6d/Lana_Del_Rey_Releases_Music_Video_For_New_Track_%27Burning_Desire%279.jpg'
             alt='banner'
             style={{
-              width: '250px',
+              width: isMobile ? '100%' : '250px',
               height: '180px',
               objectFit: 'cover',
               borderRadius: '25px'
@@ -281,14 +299,20 @@ function App() {
         {/* Music Player */}
         <div
           style={{
-            marginTop: 'auto',
+            marginTop: '40px',
             background: 'rgba(255,255,255,0.75)',
             backdropFilter: 'blur(20px)',
             borderRadius: '30px',
             padding: '20px',
+
             display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+
             alignItems: 'center',
             justifyContent: 'space-between',
+
+            gap: '20px',
+
             boxShadow:
               '0 10px 30px rgba(15,23,42,0.08)'
           }}
@@ -304,8 +328,8 @@ function App() {
               src='https://m.media-amazon.com/images/M/MV5BNWRiODk3YmItZTYwZi00YmU2LWI0ZmQtMGU1YjM1MGNhZTE4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg'
               alt='music'
               style={{
-                width: '70px',
-                height: '70px',
+                width: isMobile ? '60px' : '70px',
+                height: isMobile ? '60px' : '70px',
                 objectFit: 'cover',
                 borderRadius: '20px'
               }}
